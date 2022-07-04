@@ -29,7 +29,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                     }
                 }
                 .padding([.top], DesignSystemConstants.Padding.short)
-                .onLoad {
+                .onAppear {
                     viewModel.fetchShows()
                 }
                 .navigationTitle("Home")
@@ -48,9 +48,9 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                 }
             }
             
-            if viewModel.isLoading {
-                LoadingView()
-            }
+//            if viewModel.isLoading {
+//                LoadingView()
+//            }
         }
     }
     

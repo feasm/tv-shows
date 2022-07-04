@@ -118,19 +118,21 @@ struct ActorViewModel: Hashable {
 
 struct EpisodeViewModel: Hashable {
     let name: String
-    let season: Int
-    let runtime: Int
+    let season: String
+    let runtime: String
     let rating: String
     let image: String
     let summary: String
+    let airdate: String
     
     init(model: EpisodeModel) {
         self.name = model.formatEpisodeName()
-        self.season = model.season ?? 0
-        self.runtime = model.runtime ?? 0
+        self.season = "\(model.season ?? 0)"
+        self.runtime = "\(model.runtime ?? 0) minutes"
         self.rating = model.formatRating()
         self.image = model.image?.medium ?? ""
         self.summary = model.summary?.htmlToString() ?? ""
+        self.airdate = model.airdate ?? ""
     }
 }
 
@@ -139,6 +141,8 @@ enum LocalError: Error {
 }
 
 protocol LocalStorage {
+    var didUpdateFavorites: PassthroughSubject<Bool, Never> { get }
+    
     func addFavorite(show: ShowModel)
     func removeFavorite(show: ShowModel)
     func checkIsFavorite(id: Int) -> Bool
@@ -156,6 +160,7 @@ final class LocalStorageImpl: LocalStorage {
     let userDefaults: UserDefaults
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
+    var didUpdateFavorites = PassthroughSubject<Bool, Never>()
     
     init(userDefaults: UserDefaults = UserDefaults.standard) {
         self.userDefaults = userDefaults
@@ -171,6 +176,8 @@ final class LocalStorageImpl: LocalStorage {
         if let encodedData = try? encoder.encode(favoriteList) {
             userDefaults.set(encodedData, forKey: LocalStorageImpl.favoriteKey)
         }
+        
+        didUpdateFavorites.send(true)
     }
     
     func removeFavorite(show: ShowModel) {
@@ -181,6 +188,8 @@ final class LocalStorageImpl: LocalStorage {
         if let encodedData = try? encoder.encode(favoriteList) {
             userDefaults.set(encodedData, forKey: LocalStorageImpl.favoriteKey)
         }
+        
+        didUpdateFavorites.send(true)
     }
     
     func checkIsFavorite(id: Int) -> Bool {

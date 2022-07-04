@@ -90,6 +90,7 @@ struct EpisodeModel: Codable {
     let rating: RatingModel?
     let image: ImageModel?
     let summary: String?
+    let airdate: String?
     
     func formatEpisodeName() -> String {
         let name = self.name ?? ""

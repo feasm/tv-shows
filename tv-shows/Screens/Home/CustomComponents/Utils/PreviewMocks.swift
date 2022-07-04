@@ -18,8 +18,12 @@ struct PreviewMocks {
     
     static let showRating = RatingModel(average: 8.5)
     
+    static let episodeImage = ImageModel(medium: "https://static.tvmaze.com/uploads/images/medium_landscape/1/4388.jpg", original: "https://static.tvmaze.com/uploads/images/medium_landscape/1/4388.jpg")
+    
+    static let episode = EpisodeModel(name: "Pilot", season: 1, number: 1, runtime: 90, rating: showRating, image: episodeImage, summary: summary, airdate: "29-05-2009")
+    
     static let moreInfo = MoreInfoModel(cast: [CastModel(person: PersonModel(id: 0, url: "", name: "Tom Holland", birthday: "05-02-1970", image: nil, country: CountryModel(name: "United States")),
-                                                         character: CharacterModel(image: showImage))], episodes: [])
+                                                         character: CharacterModel(image: showImage))], episodes: [episode])
     
     static let showImage = ImageModel(medium: "https://static.tvmaze.com/uploads/images/medium_portrait/1/4600.jpg", original: "figure.walk")
     

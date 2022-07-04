@@ -30,9 +30,9 @@ struct PeopleView: View {
             }
             .searchable(text: $viewModel.searchText)
             
-            if viewModel.isLoading {
-                LoadingView()
-            }
+//            if viewModel.isLoading {
+//                LoadingView()
+//            }
         }
     }
 }

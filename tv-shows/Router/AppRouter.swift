@@ -7,19 +7,13 @@
 
 import SwiftUI
 
-protocol Router {
-    func navigateToHomeView() -> AnyView
-    func navigateToPeopleView() -> AnyView
-    func navigateToSearchView() -> AnyView
-    func navigateToShowDetailView(id: Int) -> AnyView
-}
-
 final class AppRouter {
+    
+    static let localStorage = LocalStorageImpl()
     
     static func navigateToHomeView() -> AnyView {
         let provider = HTTPProvider(session: URLSession.shared)
         let service = TVMazeServiceImpl(provider: provider)
-        let localStorage = LocalStorageImpl()
         let viewModel = HomeViewModelImpl(service: service, localStorage: localStorage)
         
         return AnyView(
@@ -52,7 +46,6 @@ final class AppRouter {
     static func navigateToShowDetailView(id: Int) -> AnyView {
         let provider = HTTPProvider(session: URLSession.shared)
         let service = TVMazeServiceImpl(provider: provider)
-        let localStorage = LocalStorageImpl()
         let viewModel = ShowDetailViewModelImpl(localStorage: localStorage, service: service, showId: id)
         
         return AnyView(

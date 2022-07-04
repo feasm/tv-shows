@@ -21,7 +21,7 @@ struct ShowDetailView: View {
         ZStack {
             ScrollView(showsIndicators: false) {
                 ZStack {
-                    imageHeaderView
+                    ImageHeaderView(imageURL: viewModel.imageURL)
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: Constants.imageCorner, style: RoundedCornerStyle.continuous)
@@ -71,38 +71,28 @@ struct ShowDetailView: View {
                 }
             }
             .onAppear {
-                UINavigationBar.appearance().tintColor = .white
                 viewModel.getShow()
             }
+            .animation(.easeIn)
             .edgesIgnoringSafeArea(.top)
             
-            if viewModel.isLoading {
-                LoadingView()
-            }
-        }
-    }
-    
-    var imageHeaderView: some View {
-        VStack {
-            if !viewModel.imageURL.isEmpty {
-                AsyncMovieImage(imageName: viewModel.imageURL, height: Constants.imageHeight, isClipped: false)
-            }
-            
-            Spacer()
+//            if viewModel.isLoading {
+//                LoadingView()
+//            }
         }
     }
     
     var featureListView: some View {
         HStack {
-            showFeatureView(title: "Type", value: viewModel.type)
+            VerticalTextView(title: "Type", value: viewModel.type)
             
             Spacer()
             
-            showFeatureView(title: "Language", value: viewModel.language)
+            VerticalTextView(title: "Language", value: viewModel.language)
             
             Spacer()
             
-            showFeatureView(title: "Status", value: viewModel.status)
+            VerticalTextView(title: "Status", value: viewModel.status)
         }
     }
     
@@ -133,12 +123,14 @@ struct ShowDetailView: View {
             }
             
             ForEach(viewModel.episodes, id: \.self) { episodeViewModel in
-                RowView(image: episodeViewModel.image,
-                        title: episodeViewModel.name,
-                        description: episodeViewModel.summary,
-                        lightDescription: "",
-                        circleShape: false,
-                        imageSize: 100)
+                NavigationLink(destination: EpisodeView(viewModel: episodeViewModel)) {
+                    RowView(image: episodeViewModel.image,
+                            title: episodeViewModel.name,
+                            description: episodeViewModel.summary,
+                            lightDescription: "",
+                            circleShape: false,
+                            imageSize: 100)
+                }
                 .frame(height: 100)
             }
         }
@@ -154,17 +146,5 @@ struct ShowDetailView_Previews: PreviewProvider {
         let viewModel = ShowDetailViewModelImpl(localStorage: localStorage, service: service, showId: 1)
         
         ShowDetailView(viewModel: viewModel)
-    }
-}
-
-extension ShowDetailView {
-    func showFeatureView(title: String, value: String) -> AnyView {
-        return AnyView(
-            VStack(alignment: .leading, spacing: DesignSystemConstants.Spacing.veryShort) {
-                DescriptionText(title)
-                
-                Text(value)
-            }
-        )
     }
 }

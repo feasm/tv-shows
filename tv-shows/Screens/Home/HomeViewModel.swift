@@ -91,7 +91,7 @@ final class HomeViewModelImpl: HomeViewModel {
                     switch result {
                     case .finished:
                         break
-                    case .failure(let _):
+                    case .failure:
                         self?.filteredShowViewModels = []
                     }
                 } receiveValue: { searchedShows in
@@ -153,7 +153,7 @@ final class SectionViewModel: ObservableObject {
     }
     
     func updateShows() {
-        numberOfShows += 10
+        numberOfShows += 4
         filteredShowViewModels = Array(showViewModels.prefix(numberOfShows))
     }
     

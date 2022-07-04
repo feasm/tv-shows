@@ -16,6 +16,9 @@
 		BC51BD372872D7F200BF8AD4 /* PeopleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD362872D7F200BF8AD4 /* PeopleViewModel.swift */; };
 		BC51BD392872DCD100BF8AD4 /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD382872DCD100BF8AD4 /* String+extensions.swift */; };
 		BC51BD3B2872DCF900BF8AD4 /* SummaryText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD3A2872DCF900BF8AD4 /* SummaryText.swift */; };
+		BC51BD3E2873844900BF8AD4 /* EpisodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD3D2873844900BF8AD4 /* EpisodeView.swift */; };
+		BC51BD402873861E00BF8AD4 /* ImageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD3F2873861E00BF8AD4 /* ImageHeaderView.swift */; };
+		BC51BD422873898200BF8AD4 /* VerticalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD412873898200BF8AD4 /* VerticalTextView.swift */; };
 		BC6705B9286F3F2B00FCACBD /* tv_showsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6705B8286F3F2B00FCACBD /* tv_showsApp.swift */; };
 		BC6705BB286F3F2B00FCACBD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6705BA286F3F2B00FCACBD /* HomeView.swift */; };
 		BC6705BD286F3F2F00FCACBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC6705BC286F3F2F00FCACBD /* Assets.xcassets */; };
@@ -76,6 +79,9 @@
 		BC51BD362872D7F200BF8AD4 /* PeopleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewModel.swift; sourceTree = "<group>"; };
 		BC51BD382872DCD100BF8AD4 /* String+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extensions.swift"; sourceTree = "<group>"; };
 		BC51BD3A2872DCF900BF8AD4 /* SummaryText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryText.swift; sourceTree = "<group>"; };
+		BC51BD3D2873844900BF8AD4 /* EpisodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeView.swift; sourceTree = "<group>"; };
+		BC51BD3F2873861E00BF8AD4 /* ImageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHeaderView.swift; sourceTree = "<group>"; };
+		BC51BD412873898200BF8AD4 /* VerticalTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalTextView.swift; sourceTree = "<group>"; };
 		BC6705B5286F3F2B00FCACBD /* tv-shows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tv-shows.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC6705B8286F3F2B00FCACBD /* tv_showsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tv_showsApp.swift; sourceTree = "<group>"; };
 		BC6705BA286F3F2B00FCACBD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 		BC51BD3C287335C400BF8AD4 /* Episode */ = {
 			isa = PBXGroup;
 			children = (
+				BC51BD3D2873844900BF8AD4 /* EpisodeView.swift */,
 			);
 			path = Episode;
 			sourceTree = "<group>";
@@ -246,6 +253,8 @@
 				BC51BD2A2871EFF900BF8AD4 /* ImageText.swift */,
 				BC51BD342872CB2700BF8AD4 /* ProgressView.swift */,
 				BC51BD3A2872DCF900BF8AD4 /* SummaryText.swift */,
+				BC51BD3F2873861E00BF8AD4 /* ImageHeaderView.swift */,
+				BC51BD412873898200BF8AD4 /* VerticalTextView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -508,13 +517,16 @@
 				BC670616286FCAB100FCACBD /* SubtitleText.swift in Sources */,
 				BC51BD2B2871EFF900BF8AD4 /* ImageText.swift in Sources */,
 				BC6705F4286F501400FCACBD /* TitleText.swift in Sources */,
+				BC51BD3E2873844900BF8AD4 /* EpisodeView.swift in Sources */,
 				BC6705FA286F5E0000FCACBD /* HomeViewModel.swift in Sources */,
 				BC670614286FCA8F00FCACBD /* DescriptionText.swift in Sources */,
 				BC670607286F664900FCACBD /* EndpointType.swift in Sources */,
 				BC670610286FCA1700FCACBD /* GenreLabel.swift in Sources */,
 				BC6705E9286F4C2A00FCACBD /* MovieView.swift in Sources */,
 				BC6705F0286F4EBA00FCACBD /* Colors+extensions.swift in Sources */,
+				BC51BD422873898200BF8AD4 /* VerticalTextView.swift in Sources */,
 				BC6705FF286F5EE100FCACBD /* TVMazeService.swift in Sources */,
+				BC51BD402873861E00BF8AD4 /* ImageHeaderView.swift in Sources */,
 				BC670602286F606500FCACBD /* Constants.swift in Sources */,
 				BC6705F8286F5CAE00FCACBD /* LazyScrollView.swift in Sources */,
 				BC6705F6286F51B000FCACBD /* DesignSystemConstants.swift in Sources */,
