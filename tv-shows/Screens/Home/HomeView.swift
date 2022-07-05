@@ -12,20 +12,30 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
     
     var body: some View {
-        TabView {
-            
-            homeView
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-            
-            AppRouter.navigateToPeopleView()
-                .tabItem {
-                    Label("People", systemImage: "person")
-                }
-            
+        if !viewModel.isLoggedIn {
+            VStack {
+                TitleText("Need Authentication")
+                DescriptionText("Prove you owns your device!")
+            }
+            .onAppear {
+                viewModel.logIn()
+            }
+        } else {
+            TabView {
+                
+                homeView
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+                
+                AppRouter.navigateToPeopleView()
+                    .tabItem {
+                        Label("People", systemImage: "person")
+                    }
+                
+            }
+            .accentColor(Color.secondaryColor)
         }
-        .accentColor(Color.secondaryColor)
     }
     
     var homeView: some View {
