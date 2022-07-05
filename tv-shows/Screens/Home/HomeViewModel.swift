@@ -7,11 +7,13 @@
 
 import SwiftUI
 import Combine
+import LocalAuthentication
 
 final class HomeViewModel: ObservableObject {
     private var service: TVMazeService
     private var localStorage: LocalStorage
     
+    @Published var isLoggedIn = false
     @Published var isLoading = false
     @Published var showViewModels = [ShowViewModel]()
     @Published var favoriteShowViewModels = [ShowViewModel]()
@@ -31,6 +33,18 @@ final class HomeViewModel: ObservableObject {
     init(service: TVMazeService, localStorage: LocalStorage) {
         self.service = service
         self.localStorage = localStorage
+    }
+    
+    func logIn() {
+        let reason = "Log in with Face ID to use the App"
+        LAContext().evaluatePolicy(
+            .deviceOwnerAuthentication,
+            localizedReason: reason
+        ) { [weak self] success, error in
+            if success {
+                self?.isLoggedIn = true
+            }
+        }
     }
     
     func fetchShows() {
