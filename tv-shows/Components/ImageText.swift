@@ -13,10 +13,12 @@ struct ImageText: View {
     
     var body: some View {
         HStack(spacing: DesignSystemConstants.Spacing.veryShort) {
+            
             Image(systemName: image)
             
             Text(text)
-                .foregroundColor(Color.strongBlack)
+                .foregroundColor(Color.secondaryColor)
+            
         }
     }
 }

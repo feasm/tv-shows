@@ -27,10 +27,10 @@ struct PreviewMocks {
     
     static let showImage = ImageModel(medium: "https://static.tvmaze.com/uploads/images/medium_portrait/1/4600.jpg", original: "figure.walk")
     
-    static let thorMovie = ShowModel(id: 1, name: "Thor", genres: genreList, schedule: schedule, rating: showRating, image: showImage, summary: summary, type: "SCRIPTED", language: "English", status: "Ended", moreInfo: moreInfo)
+    static let thorShow = ShowModel(id: 1, name: "Thor", genres: genreList, schedule: schedule, rating: showRating, image: showImage, summary: summary, type: "SCRIPTED", language: "English", status: "Ended", moreInfo: moreInfo)
     
     static let movies = [
-        thorMovie
+        thorShow
    ]
     static let movieSection = SectionViewModel(title: "All movies",
                                                showViewModels: movies.map({ ShowViewModel(movie: $0) }))

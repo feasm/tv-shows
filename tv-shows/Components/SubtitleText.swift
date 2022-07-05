@@ -16,7 +16,7 @@ struct SubtitleText: View {
     
     var body: some View {
         Text(text)
-            .foregroundColor(.strongBlack)
+            .foregroundColor(.secondaryColor)
             .font(.system(size: 20))
             .bold()
             .fixedSize(horizontal: false, vertical: true)

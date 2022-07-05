@@ -16,7 +16,10 @@ struct ShowView: View {
     
     var body: some View {
         VStack(spacing: DesignSystemConstants.Spacing.short) {
-            AsyncMovieImage(imageName: viewModel.imageURL, height: 210, width: 142)
+            
+            AsyncMovieImage(imageName: viewModel.imageURL,
+                            height: 210,
+                            width: 142)
                 .shadow(radius: 10)
             
             SubtitleText(viewModel.name)
@@ -24,6 +27,7 @@ struct ShowView: View {
             RatingView(viewModel.rating)
             
             Spacer()
+            
         }
         .frame(width: 142)
     }
@@ -31,7 +35,7 @@ struct ShowView: View {
 
 struct ShowView_Previews: PreviewProvider {
     static var previews: some View {
-        ShowView(ShowViewModel(movie: PreviewMocks.thorMovie))
+        ShowView(ShowViewModel(movie: PreviewMocks.thorShow))
             .previewLayout(.sizeThatFits)
     }
 }

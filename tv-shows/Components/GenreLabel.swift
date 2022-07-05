@@ -12,6 +12,7 @@ struct GenreLabel: View {
     
     var body: some View {
         ZStack {
+            
             Capsule(style: .continuous)
                 .fill(Color.lightBlue)
             
@@ -21,6 +22,7 @@ struct GenreLabel: View {
                 .bold()
                 .padding([.top, .bottom], DesignSystemConstants.Spacing.veryShort)
                 .padding([.leading, .trailing], DesignSystemConstants.Spacing.medium)
+            
         }
     }
 }

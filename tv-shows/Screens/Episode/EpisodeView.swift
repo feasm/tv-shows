@@ -17,36 +17,55 @@ struct EpisodeView: View {
     var viewModel: EpisodeViewModel
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
+        ScrollView(.vertical,
+                   showsIndicators: false) {
+            
             ZStack {
+                
                 ImageHeaderView(imageURL: viewModel.image)
                 
                 ZStack {
-                    RoundedRectangle(cornerRadius: Constants.imageCorner, style: RoundedCornerStyle.continuous)
-                        .fill(Color.clearWhite)
                     
-                    VStack(alignment: .leading, spacing: DesignSystemConstants.Spacing.medium) {
+                    RoundedRectangle(cornerRadius: Constants.imageCorner,
+                                     style: RoundedCornerStyle.continuous)
+                        .fill(Color.primaryColor)
+                    
+                    VStack(alignment: .leading,
+                           spacing: DesignSystemConstants.Spacing.medium) {
+                        
                         TitleText(viewModel.name)
                         
-                        VStack(alignment: .leading, spacing: DesignSystemConstants.Spacing.short) {
+                        VStack(alignment: .leading,
+                               spacing: DesignSystemConstants.Spacing.short) {
+                            
                             RatingView(viewModel.rating)
                             
                             featureListView
+                            
                         }
                         
-                        SummaryText(title: "Description", text: viewModel.summary)
+                        SummaryText(title: "Description",
+                                    text: viewModel.summary)
+                        
                         Spacer()
+                        
                     }
                     .padding(DesignSystemConstants.Spacing.medium)
+                    
                 }
-                .padding(.top, Constants.imageHeight - Constants.imageCorner)
+                .padding(.top,
+                         Constants.imageHeight - Constants.imageCorner)
+                
             }
+            .animation(.easeIn)
+            
         }
         .edgesIgnoringSafeArea(.top)
     }
     
     var featureListView: some View {
         HStack {
+            
             VerticalTextView(title: "Season", value: viewModel.season)
             
             Spacer()
@@ -56,6 +75,7 @@ struct EpisodeView: View {
             Spacer()
             
             VerticalTextView(title: "Airdate", value: viewModel.airdate)
+            
         }
     }
 }

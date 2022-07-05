@@ -16,10 +16,12 @@ struct RatingView: View {
     
     var body: some View {
         HStack {
+            
             Image(systemName: "star.fill")
                 .renderingMode(.original)
             
             DescriptionText(text)
+            
         }
     }
 }

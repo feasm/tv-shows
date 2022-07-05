@@ -8,23 +8,7 @@
 import Combine
 import SwiftUI
 
-protocol ShowDetailViewModel: ObservableObject {
-    var isLoading: Bool { get }
-    
-    var name: String { get }
-    var genres: [String] { get }
-    var schedule: String { get }
-    var rating: String { get }
-    var imageURL: String { get }
-    var summary: String { get }
-    var type: String { get }
-    var language: String { get }
-    var status: String { get }
-    
-    func getShow()
-}
-
-final class ShowDetailViewModelImpl: ShowDetailViewModel {
+final class ShowDetailViewModelImpl: ObservableObject {
     let service: TVMazeService
     let localStorage: LocalStorage
     let showId: Int
@@ -109,103 +93,4 @@ final class ShowDetailViewModelImpl: ShowDetailViewModel {
         let episodesOnSeason = showModel?.moreInfo?.episodes.filter({ $0.season == selectedSeason })
         episodes = episodesOnSeason?.map({ EpisodeViewModel(model: $0) }) ?? []
     }
-}
-
-struct ActorViewModel: Hashable {
-    let name: String
-    let photo: String
-}
-
-struct EpisodeViewModel: Hashable {
-    let name: String
-    let season: String
-    let runtime: String
-    let rating: String
-    let image: String
-    let summary: String
-    let airdate: String
-    
-    init(model: EpisodeModel) {
-        self.name = model.formatEpisodeName()
-        self.season = "\(model.season ?? 0)"
-        self.runtime = "\(model.runtime ?? 0) minutes"
-        self.rating = model.formatRating()
-        self.image = model.image?.medium ?? ""
-        self.summary = model.summary?.htmlToString() ?? ""
-        self.airdate = model.airdate ?? ""
-    }
-}
-
-enum LocalError: Error {
-    case notFound
-}
-
-protocol LocalStorage {
-    var didUpdateFavorites: PassthroughSubject<Bool, Never> { get }
-    
-    func addFavorite(show: ShowModel)
-    func removeFavorite(show: ShowModel)
-    func checkIsFavorite(id: Int) -> Bool
-    func getFavorites() -> [ShowModel]
-}
-
-final class LocalStorageImpl: LocalStorage {
-    
-    // MARK: - Constants
-    
-    static let favoriteKey = "favoriteList"
-    
-    // MARK: - Properties
-    
-    let userDefaults: UserDefaults
-    let encoder = JSONEncoder()
-    let decoder = JSONDecoder()
-    var didUpdateFavorites = PassthroughSubject<Bool, Never>()
-    
-    init(userDefaults: UserDefaults = UserDefaults.standard) {
-        self.userDefaults = userDefaults
-    }
-    
-    func addFavorite(show: ShowModel) {
-        var favoriteList = getFavorites()
-        
-        if !favoriteList.contains(where: { $0.id == show.id }) {
-            favoriteList.append(show)
-        }
-        
-        if let encodedData = try? encoder.encode(favoriteList) {
-            userDefaults.set(encodedData, forKey: LocalStorageImpl.favoriteKey)
-        }
-        
-        didUpdateFavorites.send(true)
-    }
-    
-    func removeFavorite(show: ShowModel) {
-        var favoriteList = getFavorites()
-        
-        favoriteList.removeAll(where: { $0.id == show.id })
-        
-        if let encodedData = try? encoder.encode(favoriteList) {
-            userDefaults.set(encodedData, forKey: LocalStorageImpl.favoriteKey)
-        }
-        
-        didUpdateFavorites.send(true)
-    }
-    
-    func checkIsFavorite(id: Int) -> Bool {
-        let favoriteList = getFavorites()
-        
-        return favoriteList.contains(where: { $0.id == id })
-    }
-    
-    func getFavorites() -> [ShowModel] {
-        if let favoriteList  = userDefaults.data(forKey: LocalStorageImpl.favoriteKey) {
-            let showList = try? decoder.decode([ShowModel].self, from: favoriteList)
-            
-            return showList?.sorted(by: { $0.name < $1.name }) ?? []
-        }
-        
-        return []
-    }
-    
 }

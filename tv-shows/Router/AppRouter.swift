@@ -14,7 +14,7 @@ final class AppRouter {
     static func navigateToHomeView() -> AnyView {
         let provider = HTTPProvider(session: URLSession.shared)
         let service = TVMazeServiceImpl(provider: provider)
-        let viewModel = HomeViewModelImpl(service: service, localStorage: localStorage)
+        let viewModel = HomeViewModel(service: service, localStorage: localStorage)
         
         return AnyView(
             HomeView(viewModel: viewModel)
@@ -37,7 +37,7 @@ final class AppRouter {
         )
     }
     
-    static func navigateToSearchView(viewModel: HomeViewModelImpl) -> AnyView {
+    static func navigateToSearchView(viewModel: HomeViewModel) -> AnyView {
         return AnyView(
             SearchView(viewModel: viewModel)
         )
@@ -50,6 +50,20 @@ final class AppRouter {
         
         return AnyView(
             ShowDetailView(viewModel: viewModel)
+        )
+    }
+    
+    static func navigateToEpisodeView(viewModel: EpisodeViewModel) -> AnyView {
+        return AnyView(
+            EpisodeView(viewModel: viewModel)
+        )
+    }
+    
+    static func navigateToShowListView(viewModels: [ShowViewModel], title: String) -> AnyView {
+        let viewModel = ShowListViewModel(title: title, showViewModels: viewModels)
+        
+        return AnyView(
+            ShowListView(viewModel: viewModel)
         )
     }
 }

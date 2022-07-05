@@ -37,7 +37,7 @@ struct LazyScrollView_Previews: PreviewProvider {
     static var previews: some View {
         LazyScrollView(.vertical,
                        spacing: DesignSystemConstants.Spacing.short) {
-            MovieSectionView(viewModel: PreviewMocks.movieSection)
+            SectionView(viewModel: PreviewMocks.movieSection)
         }
     }
 }

@@ -8,12 +8,12 @@
 import SwiftUI
 
 extension Color {
-    static var clearWhite: Color {
-        Color.white
+    static var primaryColor: Color {
+        Color("PrimaryColor")
     }
     
-    static var strongBlack: Color {
-        Color.black
+    static var secondaryColor: Color {
+        Color("SecondaryColor")
     }
     
     static var lightGray: Color {

@@ -12,12 +12,19 @@ struct GenreListView: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
+            
             LazyHStack {
-                ForEach(genreList, id: \.self) { genre in
+                
+                ForEach(genreList,
+                        id: \.self) { genre in
+                    
                     GenreLabel(text: genre)
                         .frame(height: 35)
+                    
                 }
+                
             }.frame(height: 35)
+            
         }
     }
 }

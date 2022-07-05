@@ -12,10 +12,13 @@ struct VerticalTextView: View {
     let value: String
     
     var body: some View {
-        VStack(alignment: .leading, spacing: DesignSystemConstants.Spacing.veryShort) {
+        VStack(alignment: .leading,
+               spacing: DesignSystemConstants.Spacing.veryShort) {
+            
             DescriptionText(title)
             
             Text(value)
+            
         }
     }
 }

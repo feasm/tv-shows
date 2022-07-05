@@ -34,8 +34,12 @@ final class PeopleViewModel: ObservableObject {
                     return
                 }
                 
-                self.peopleViewModels = self.peopleModels.filter({ ($0.name ?? "").contains(newText) })
-                                                            .map({ PersonViewModel(personModel: $0) })
+                self.peopleViewModels = self.peopleModels
+                                            .filter({ ($0.name ?? "")
+                                            .contains(newText) })
+                                            .map({
+                                                PersonViewModel(personModel: $0)
+                                            })
             }
             .store(in: &cancelBag)
     }
@@ -70,21 +74,5 @@ final class PeopleViewModel: ObservableObject {
     
     func resetSearch() {
         peopleViewModels = peopleModels.map({ PersonViewModel(personModel: $0) })
-    }
-}
-
-struct PersonViewModel: Hashable {
-    let id: Int
-    let name: String
-    let birthday: String
-    let photo: String
-    let country: String
-    
-    init(personModel: PersonModel) {
-        self.id = personModel.id ?? 0
-        self.name = personModel.name ?? ""
-        self.birthday = personModel.birthday ?? "Unknown birthday"
-        self.photo = personModel.image?.medium ?? "photo"
-        self.country = personModel.country?.name ?? "Unknown country"
     }
 }

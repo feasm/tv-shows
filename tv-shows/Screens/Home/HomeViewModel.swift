@@ -8,25 +8,7 @@
 import SwiftUI
 import Combine
 
-protocol HomeViewModel: ObservableObject {
-    var isLoading: Bool { get }
-    var showViewModels: [ShowViewModel] { get }
-    var favoriteShowViewModels: [ShowViewModel] { get }
-    var filteredShowViewModels: [ShowViewModel] { get }
-    var sectionViewModels: [SectionViewModel] { get }
-    var searchText: String { get set }
-    var hasSearchResults: Bool { get }
-    
-    func fetchShows()
-    func searchShows()
-    
-    func clearSearch()
-    
-    func navigateToSearchView() -> AnyView
-    func navigateToShowDetailView(id: Int) -> AnyView
-}
-
-final class HomeViewModelImpl: HomeViewModel {
+final class HomeViewModel: ObservableObject {
     private var service: TVMazeService
     private var localStorage: LocalStorage
     
@@ -104,57 +86,14 @@ final class HomeViewModelImpl: HomeViewModel {
         filteredShowViewModels = []
     }
     
+    func updateFavorites() {
+        favoriteShowViewModels = self.localStorage.getFavorites().map({ ShowViewModel(movie: $0) })
+        
+        sectionViewModels.first(where: { $0.title == "Favorites" })?.showViewModels = favoriteShowViewModels
+    }
+    
     func navigateToSearchView() -> AnyView {
         return AppRouter.navigateToSearchView(viewModel: self)
-    }
-    
-    func navigateToShowDetailView(id: Int) -> AnyView {
-        return AppRouter.navigateToShowDetailView(id: id)
-    }
-}
-
-struct ShowViewModel: Hashable {
-    let id: Int
-    let name: String
-    let genres: [String]
-    let schedule: String
-    let rating: String
-    let imageURL: String
-    let summary: String
-    let type: String
-    let language: String
-    let status: String
-    
-    init(movie: ShowModel) {
-        self.id = movie.id
-        self.name = movie.name
-        self.genres = movie.genres
-        self.imageURL = movie.image?.medium ?? "photo"
-        self.summary = movie.summary.htmlToString()
-        self.type = movie.type
-        self.language = movie.language
-        self.status = movie.status
-        
-        self.schedule = movie.formatSchedule()
-        self.rating = movie.formatRating()
-    }
-}
-
-final class SectionViewModel: ObservableObject {
-    let title: String
-    let showViewModels: [ShowViewModel]
-    
-    var numberOfShows = 0
-    @Published var filteredShowViewModels = [ShowViewModel]()
-    
-    init(title: String, showViewModels: [ShowViewModel]) {
-        self.title = title
-        self.showViewModels = showViewModels
-    }
-    
-    func updateShows() {
-        numberOfShows += 4
-        filteredShowViewModels = Array(showViewModels.prefix(numberOfShows))
     }
     
     func navigateToShowDetailView(id: Int) -> AnyView {

@@ -14,7 +14,7 @@ struct ButtonLabel: View {
         Text(text)
             .font(.system(size: 14))
             .foregroundColor(.veryLightGray)
-            .padding(8)
+            .padding(DesignSystemConstants.Padding.veryShort)
             .overlay(
                 Capsule(style: .continuous)
                     .stroke(Color.veryLightGray, style: StrokeStyle(lineWidth: 2))

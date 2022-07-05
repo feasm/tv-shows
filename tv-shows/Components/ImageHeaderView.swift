@@ -13,11 +13,13 @@ struct ImageHeaderView: View {
     
     var body: some View {
         VStack {
+            
             if !imageURL.isEmpty {
                 AsyncMovieImage(imageName: imageURL, height: imageHeight, isClipped: false)
             }
             
             Spacer()
+            
         }
     }
 }

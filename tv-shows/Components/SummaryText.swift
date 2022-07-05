@@ -12,10 +12,12 @@ struct SummaryText: View {
     var text: String
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: DesignSystemConstants.Spacing.short) {
+            
             TitleText(title)
             
             DescriptionText(text)
+            
         }
     }
 }

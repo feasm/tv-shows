@@ -11,15 +11,15 @@ import SwiftUI
 struct tv_showsApp: App {
     init() {
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = .white
-        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-        navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+        navigationBarAppearance.backgroundColor = UIColor(named: "PrimaryColor")
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "SecondaryColor")]
+        navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "SecondaryColor")]
                        
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-        UINavigationBar.appearance().tintColor = .black
+        UINavigationBar.appearance().tintColor = UIColor(named: "SecondaryColor")
         
         let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.backgroundColor = .white
+        tabBarAppearance.backgroundColor = UIColor(named: "PrimaryColor")
         
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance

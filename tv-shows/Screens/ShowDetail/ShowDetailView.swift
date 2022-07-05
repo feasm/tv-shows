@@ -19,27 +19,41 @@ struct ShowDetailView: View {
     
     var body: some View {
         ZStack {
+            
             ScrollView(showsIndicators: false) {
+                
                 ZStack {
+                    
                     ImageHeaderView(imageURL: viewModel.imageURL)
                     
                     ZStack {
-                        RoundedRectangle(cornerRadius: Constants.imageCorner, style: RoundedCornerStyle.continuous)
-                            .fill(Color.clearWhite)
                         
-                        VStack(alignment: .leading, spacing: DesignSystemConstants.Spacing.medium) {
-                            VStack(alignment: .leading, spacing: 16) {
+                        RoundedRectangle(cornerRadius: Constants.imageCorner,
+                                         style: RoundedCornerStyle.continuous)
+                            .fill(Color.primaryColor)
+                        
+                        VStack(alignment: .leading,
+                               spacing: DesignSystemConstants.Spacing.medium) {
+                            
+                            VStack(alignment: .leading,
+                                   spacing: DesignSystemConstants.Spacing.short) {
+                                
                                 HStack {
+                                    
                                     TitleText(viewModel.name)
                                     
                                     Spacer()
                                     
                                     Button {
+                                        
                                         viewModel.toggleFavorite()
+                                        
                                     } label: {
+                                        
                                         Image(systemName: viewModel.isFavorite ? "bookmark.fill" : "bookmark")
                                             .font(.system(size: 26))
-                                            .foregroundColor(viewModel.isFavorite ? .strongBlue : .strongBlack)
+                                            .foregroundColor(viewModel.isFavorite ? .strongBlue : .secondaryColor)
+                                        
                                     }
                                 }
                                 
@@ -48,6 +62,7 @@ struct ShowDetailView: View {
                                 GenreListView(genreList: viewModel.genres)
                                 
                                 featureListView
+                                
                             }
                             
                             SummaryText(title: "Schedule", text: viewModel.schedule)
@@ -55,30 +70,40 @@ struct ShowDetailView: View {
                             SummaryText(title: "Description", text: viewModel.summary)
                             
                             VStack {
-                                VStack(alignment: .leading, spacing: 16) {
-                                    MovieSectionHeaderView("Cast")
+                                
+                                VStack(alignment: .leading,
+                                       spacing: DesignSystemConstants.Spacing.short) {
+                                    
+                                    SectionHeaderView("Cast")
                                     
                                     peopleView
+                                    
                                 }
+                                
                             }
                             
                             episodeListView
+                                .animation(.none)
+                            
                         }
                         .padding(DesignSystemConstants.Spacing.medium)
+                        
                     }
                     .edgesIgnoringSafeArea(.top)
                     .padding(.top, Constants.imageHeight - Constants.imageCorner)
+                    
                 }
+                
             }
-            .onAppear {
+            .onLoad {
                 viewModel.getShow()
             }
             .animation(.easeIn)
             .edgesIgnoringSafeArea(.top)
             
-//            if viewModel.isLoading {
-//                LoadingView()
-//            }
+            if viewModel.isLoading {
+                LoadingView()
+            }
         }
     }
     
@@ -99,16 +124,27 @@ struct ShowDetailView: View {
     var peopleView: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             
-            HStack(alignment: .top, spacing: DesignSystemConstants.Spacing.short) {
-                ForEach(viewModel.actors, id: \.self) { actorViewModel in
+            HStack(alignment: .top,
+                   spacing: DesignSystemConstants.Spacing.short) {
+                
+                ForEach(viewModel.actors,
+                        id: \.self) { actorViewModel in
+                    
                     VStack(spacing: DesignSystemConstants.Spacing.veryShort) {
-                        AsyncMovieImage(imageName: actorViewModel.photo, height: 70, width: 70)
+                        
+                        AsyncMovieImage(imageName: actorViewModel.photo,
+                                        height: 70,
+                                        width: 70)
                         
                         Text(actorViewModel.name)
+                        
                     }
                     .frame(width: 70)
+                    
                 }
+                
             }
+            
         }
     }
     
@@ -117,34 +153,35 @@ struct ShowDetailView: View {
             TitleText("Episodes")
             
             Picker("Season \(viewModel.selectedSeason)", selection: $viewModel.selectedSeason) {
+                
                 ForEach((1...viewModel.lastSeason), id: \.self) { index in
                     Text("Season \(index)")
                 }
+                
             }
             
             ForEach(viewModel.episodes, id: \.self) { episodeViewModel in
-                NavigationLink(destination: EpisodeView(viewModel: episodeViewModel)) {
+                
+                NavigationLink(destination: AppRouter.navigateToEpisodeView(viewModel: episodeViewModel)) {
+                    
                     RowView(image: episodeViewModel.image,
                             title: episodeViewModel.name,
                             description: episodeViewModel.summary,
                             lightDescription: "",
                             circleShape: false,
                             imageSize: 100)
+                    
                 }
                 .frame(height: 100)
+                
             }
+            
         }
-        .listStyle(.plain)
     }
 }
 
 struct ShowDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let provider = HTTPProvider(session: URLSession.shared)
-        let service = TVMazeServiceImpl(provider: provider)
-        let localStorage = LocalStorageImpl()
-        let viewModel = ShowDetailViewModelImpl(localStorage: localStorage, service: service, showId: 1)
-        
-        ShowDetailView(viewModel: viewModel)
+        AppRouter.navigateToShowDetailView(id: 1)
     }
 }
