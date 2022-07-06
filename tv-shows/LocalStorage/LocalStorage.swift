@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import Combine
 
 protocol LocalStorage {
+    var onUpdate: PassthroughSubject<[ShowModel], Never> { get }
     func addFavorite(show: ShowModel)
     func removeFavorite(show: ShowModel)
     func checkIsFavorite(id: Int) -> Bool
@@ -21,6 +23,8 @@ final class LocalStorageImpl: LocalStorage {
     let userDefaults: UserDefaults
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
+    
+    var onUpdate = PassthroughSubject<[ShowModel], Never>()
     
     init(userDefaults: UserDefaults = UserDefaults.standard) {
         self.userDefaults = userDefaults
@@ -36,6 +40,8 @@ final class LocalStorageImpl: LocalStorage {
         if let encodedData = try? encoder.encode(favoriteList) {
             userDefaults.set(encodedData, forKey: LocalStorageImpl.favoriteKey)
         }
+        
+        onUpdate.send(favoriteList)
     }
     
     func removeFavorite(show: ShowModel) {
@@ -46,6 +52,8 @@ final class LocalStorageImpl: LocalStorage {
         if let encodedData = try? encoder.encode(favoriteList) {
             userDefaults.set(encodedData, forKey: LocalStorageImpl.favoriteKey)
         }
+        
+        onUpdate.send(favoriteList)
     }
     
     func checkIsFavorite(id: Int) -> Bool {

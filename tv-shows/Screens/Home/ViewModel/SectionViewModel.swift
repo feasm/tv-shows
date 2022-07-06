@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class SectionViewModel: ObservableObject {
+class SectionViewModel: ObservableObject {
     let title: String
     @Published var showViewModels: [ShowViewModel]
     
@@ -22,5 +22,11 @@ final class SectionViewModel: ObservableObject {
     
     func navigateToShowListView() -> AnyView {
         return AppRouter.navigateToShowListView(viewModels: showViewModels, title: title)
+    }
+}
+
+final class FavoritesSectionViewModel: SectionViewModel {
+    override func navigateToShowListView() -> AnyView {
+        return AppRouter.navigateToFavoriteListView(viewModels: showViewModels, title: title)
     }
 }

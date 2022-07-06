@@ -15,7 +15,7 @@ enum NetworkError: Error {
     case noData
 }
 
-final class HTTPProvider {
+final class HTTPProvider<E: EndpointType> {
     
     let session: URLSession
     
@@ -23,7 +23,7 @@ final class HTTPProvider {
         self.session = session
     }
     
-    func request<T: Decodable>(_ endpoint: EndpointType) -> AnyPublisher<T, NetworkError> {
+    func request<T: Decodable>(_ endpoint: E) -> AnyPublisher<T, NetworkError> {
         var url = endpoint.baseURL
         url.appendPathComponent(endpoint.path)
         

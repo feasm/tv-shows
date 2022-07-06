@@ -34,4 +34,6 @@ struct PreviewMocks {
    ]
     static let movieSection = SectionViewModel(title: "All movies",
                                                showViewModels: movies.map({ ShowViewModel(movie: $0) }))
+    
+    static let stephenKing = PersonModel(id: 100, url: "https://static.tvmaze.com/uploads/images/medium_portrait/1/4600.jpg", name: "Stephen King", birthday: "01-01-2000", image: showImage, country: nil)
 }

@@ -18,6 +18,11 @@
 		8DBBD6F12873CA8B0093DF02 /* View+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBBD6F02873CA8B0093DF02 /* View+extensions.swift */; };
 		8DBBD6F42873CC440093DF02 /* ShowListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBBD6F32873CC440093DF02 /* ShowListView.swift */; };
 		8DBBD6F62873D5500093DF02 /* ShowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBBD6F52873D5500093DF02 /* ShowListViewModel.swift */; };
+		BC20069D287598CB006EEEF8 /* PersonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20069C287598CB006EEEF8 /* PersonDetail.swift */; };
+		BC20069F2875BD05006EEEF8 /* ShowRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC20069E2875BD05006EEEF8 /* ShowRowView.swift */; };
+		BC2006A12875C08D006EEEF8 /* PersonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2006A02875C08D006EEEF8 /* PersonDetailViewModel.swift */; };
+		BC2006A32875C09A006EEEF8 /* PersonShowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2006A22875C09A006EEEF8 /* PersonShowViewModel.swift */; };
+		BC2006A5287610A8006EEEF8 /* PinVerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2006A4287610A8006EEEF8 /* PinVerificationManager.swift */; };
 		BC51BD2828716CB900BF8AD4 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD2728716CB900BF8AD4 /* SearchView.swift */; };
 		BC51BD2B2871EFF900BF8AD4 /* ImageText.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD2A2871EFF900BF8AD4 /* ImageText.swift */; };
 		BC51BD2D287239DC00BF8AD4 /* ShowDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC51BD2C287239DC00BF8AD4 /* ShowDetailViewModel.swift */; };
@@ -92,6 +97,11 @@
 		8DBBD6F02873CA8B0093DF02 /* View+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extensions.swift"; sourceTree = "<group>"; };
 		8DBBD6F32873CC440093DF02 /* ShowListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListView.swift; sourceTree = "<group>"; };
 		8DBBD6F52873D5500093DF02 /* ShowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowListViewModel.swift; sourceTree = "<group>"; };
+		BC20069C287598CB006EEEF8 /* PersonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetail.swift; sourceTree = "<group>"; };
+		BC20069E2875BD05006EEEF8 /* ShowRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRowView.swift; sourceTree = "<group>"; };
+		BC2006A02875C08D006EEEF8 /* PersonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailViewModel.swift; sourceTree = "<group>"; };
+		BC2006A22875C09A006EEEF8 /* PersonShowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonShowViewModel.swift; sourceTree = "<group>"; };
+		BC2006A4287610A8006EEEF8 /* PinVerificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinVerificationManager.swift; sourceTree = "<group>"; };
 		BC51BD2728716CB900BF8AD4 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		BC51BD2A2871EFF900BF8AD4 /* ImageText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageText.swift; sourceTree = "<group>"; };
 		BC51BD2C287239DC00BF8AD4 /* ShowDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailViewModel.swift; sourceTree = "<group>"; };
@@ -206,6 +216,16 @@
 				8DBBD6F52873D5500093DF02 /* ShowListViewModel.swift */,
 			);
 			path = ShowList;
+			sourceTree = "<group>";
+		};
+		BC20069B287598BD006EEEF8 /* PersonDetail */ = {
+			isa = PBXGroup;
+			children = (
+				BC20069C287598CB006EEEF8 /* PersonDetail.swift */,
+				BC2006A02875C08D006EEEF8 /* PersonDetailViewModel.swift */,
+				BC2006A22875C09A006EEEF8 /* PersonShowViewModel.swift */,
+			);
+			path = PersonDetail;
 			sourceTree = "<group>";
 		};
 		BC51BD2628716C4600BF8AD4 /* Search */ = {
@@ -324,6 +344,7 @@
 				BC51BD412873898200BF8AD4 /* VerticalTextView.swift */,
 				8DBBD6DF2873C0910093DF02 /* SectionHeaderView.swift */,
 				8DBBD6EB2873C88A0093DF02 /* RowView.swift */,
+				BC20069E2875BD05006EEEF8 /* ShowRowView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -331,6 +352,7 @@
 		BC6705E3286F43BA00FCACBD /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				BC20069B287598BD006EEEF8 /* PersonDetail */,
 				8DBBD6F22873CC350093DF02 /* ShowList */,
 				BC51BD3C287335C400BF8AD4 /* Episode */,
 				BC51BD312872CA0200BF8AD4 /* People */,
@@ -385,6 +407,7 @@
 			children = (
 				BC6705EB286F4C6800FCACBD /* PreviewMocks.swift */,
 				BC670601286F606500FCACBD /* Constants.swift */,
+				BC2006A4287610A8006EEEF8 /* PinVerificationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -566,13 +589,16 @@
 				8DBBD6E02873C0910093DF02 /* SectionHeaderView.swift in Sources */,
 				BC670612286FCA5F00FCACBD /* RatingView.swift in Sources */,
 				8DBBD6DE2873C0470093DF02 /* ShowViewModel.swift in Sources */,
+				BC2006A5287610A8006EEEF8 /* PinVerificationManager.swift in Sources */,
 				BC51BD352872CB2700BF8AD4 /* ProgressView.swift in Sources */,
 				BC67060C286F66E400FCACBD /* HTTPProvider.swift in Sources */,
 				BC67061B286FD2B600FCACBD /* ShowDetailView.swift in Sources */,
 				BC51BD2828716CB900BF8AD4 /* SearchView.swift in Sources */,
+				BC20069D287598CB006EEEF8 /* PersonDetail.swift in Sources */,
 				BC670605286F662C00FCACBD /* HTTPMethod.swift in Sources */,
 				8DBBD6E82873C6AA0093DF02 /* EpisodeViewModel.swift in Sources */,
 				BC51BD392872DCD100BF8AD4 /* String+extensions.swift in Sources */,
+				BC20069F2875BD05006EEEF8 /* ShowRowView.swift in Sources */,
 				BC51BD332872CA2C00BF8AD4 /* PeopleView.swift in Sources */,
 				8DBBD6EC2873C88A0093DF02 /* RowView.swift in Sources */,
 				8DBBD6E22873C16B0093DF02 /* SectionViewModel.swift in Sources */,
@@ -596,10 +622,12 @@
 				BC51BD402873861E00BF8AD4 /* ImageHeaderView.swift in Sources */,
 				BC670602286F606500FCACBD /* Constants.swift in Sources */,
 				BC6705F8286F5CAE00FCACBD /* LazyScrollView.swift in Sources */,
+				BC2006A12875C08D006EEEF8 /* PersonDetailViewModel.swift in Sources */,
 				BC6705F6286F51B000FCACBD /* DesignSystemConstants.swift in Sources */,
 				BC6705E7286F4C1E00FCACBD /* SectionView.swift in Sources */,
 				BC6705B9286F3F2B00FCACBD /* tv_showsApp.swift in Sources */,
 				BC67060A286F66B100FCACBD /* TVMazeRequest.swift in Sources */,
+				BC2006A32875C09A006EEEF8 /* PersonShowViewModel.swift in Sources */,
 				BC51BD302872400B00BF8AD4 /* AppRouter.swift in Sources */,
 				8DBBD6E52873C2F60093DF02 /* LocalStorage.swift in Sources */,
 				BC6705FD286F5E3900FCACBD /* TVMazeModels.swift in Sources */,

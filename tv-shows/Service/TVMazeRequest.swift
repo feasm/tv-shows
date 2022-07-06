@@ -12,6 +12,7 @@ enum TVMazeRequest {
     case fetchPeople
     case searchShow(String)
     case getShow(Int)
+    case getPersonShows(Int)
 }
 
 extension TVMazeRequest: EndpointType {
@@ -29,6 +30,8 @@ extension TVMazeRequest: EndpointType {
             return "search/shows"
         case .getShow(let id):
             return "shows/\(id)"
+        case .getPersonShows(let id):
+            return "people/\(id)/castcredits"
         }
     }
     
@@ -44,6 +47,10 @@ extension TVMazeRequest: EndpointType {
             return [
                 "embed[]": "cast",
                 "embed[]": "episodes"
+            ]
+        case .getPersonShows:
+            return [
+                "embed": "show"
             ]
         default:
             return [:]

@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-final class ShowDetailViewModelImpl: ObservableObject {
+final class ShowDetailViewModel: ObservableObject {
     let service: TVMazeService
     let localStorage: LocalStorage
     let showId: Int
@@ -66,7 +66,8 @@ final class ShowDetailViewModelImpl: ObservableObject {
                 self.language = showModel.language
                 self.status = showModel.status
                 self.actors = showModel.moreInfo?.cast
-                    .map({ ActorViewModel(name: $0.person.name ?? "",
+                    .map({ ActorViewModel(id: $0.person.id ?? 0,
+                                          name: $0.person.name ?? "",
                                           photo: $0.character.image?.medium ?? "photo")
                     }) ?? []
                 self.lastSeason = (showModel.moreInfo?.episodes.map({ $0.season ?? 1 }).max()) ?? 1
@@ -92,5 +93,17 @@ final class ShowDetailViewModelImpl: ObservableObject {
     private func groupEpisodesBySeason() {
         let episodesOnSeason = showModel?.moreInfo?.episodes.filter({ $0.season == selectedSeason })
         episodes = episodesOnSeason?.map({ EpisodeViewModel(model: $0) }) ?? []
+    }
+    
+    func navigateToPersonDetailView(id: Int) -> AnyView {
+        guard let personModel = showModel?.moreInfo?.cast.first(where: { $0.person.id == id })?.person else {
+            return AnyView(Text("Some error occurred, try again later"))
+        }
+        
+        return AppRouter.navigateToPersonDetails(personModel: personModel)
+    }
+    
+    func navigateToEpisodeView(episodeViewModel: EpisodeViewModel) -> AnyView {
+        AppRouter.navigateToEpisodeView(viewModel: episodeViewModel)
     }
 }

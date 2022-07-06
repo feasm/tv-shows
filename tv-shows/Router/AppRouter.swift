@@ -12,8 +12,8 @@ final class AppRouter {
     static let localStorage = LocalStorageImpl()
     
     static func navigateToHomeView() -> AnyView {
-        let provider = HTTPProvider(session: URLSession.shared)
-        let service = TVMazeServiceImpl(provider: provider)
+        let service = TVMazeServiceImpl()
+        let localStorage = LocalStorageImpl()
         let viewModel = HomeViewModel(service: service, localStorage: localStorage)
         
         return AnyView(
@@ -22,8 +22,8 @@ final class AppRouter {
     }
     
     static func navigateToPeopleView() -> AnyView {
-        let provider = HTTPProvider(session: URLSession.shared)
-        let service = TVMazeServiceImpl(provider: provider)
+        let service = TVMazeServiceImpl()
+        let localStorage = LocalStorageImpl()
         let viewModel = PeopleViewModel(service: service)
         
         return AnyView(
@@ -31,9 +31,12 @@ final class AppRouter {
         )
     }
     
-    static func navigateToPersonDetails(id: Int) -> AnyView {
+    static func navigateToPersonDetails(personModel: PersonModel) -> AnyView {
+        let service = TVMazeServiceImpl()
+        let viewModel = PersonDetailViewModel(service: service, personModel: personModel)
+        
         return AnyView(
-            Text("Person Details")
+            PersonDetailView(viewModel: viewModel)
         )
     }
     
@@ -44,9 +47,8 @@ final class AppRouter {
     }
     
     static func navigateToShowDetailView(id: Int) -> AnyView {
-        let provider = HTTPProvider(session: URLSession.shared)
-        let service = TVMazeServiceImpl(provider: provider)
-        let viewModel = ShowDetailViewModelImpl(localStorage: localStorage, service: service, showId: id)
+        let service = TVMazeServiceImpl()
+        let viewModel = ShowDetailViewModel(localStorage: localStorage, service: service, showId: id)
         
         return AnyView(
             ShowDetailView(viewModel: viewModel)
@@ -61,6 +63,14 @@ final class AppRouter {
     
     static func navigateToShowListView(viewModels: [ShowViewModel], title: String) -> AnyView {
         let viewModel = ShowListViewModel(title: title, showViewModels: viewModels)
+        
+        return AnyView(
+            ShowListView(viewModel: viewModel)
+        )
+    }
+    
+    static func navigateToFavoriteListView(viewModels: [ShowViewModel], title: String) -> AnyView {
+        let viewModel = FavoriteListViewModel(title: title, showViewModels: viewModels, localStorage: localStorage)
         
         return AnyView(
             ShowListView(viewModel: viewModel)

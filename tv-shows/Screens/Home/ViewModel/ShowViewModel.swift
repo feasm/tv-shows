@@ -5,7 +5,7 @@
 //  Created by Gustavo Minatti on 04/07/22.
 //
 
-import Foundation
+import SwiftUI
 
 struct ShowViewModel: Hashable {
     let id: Int
@@ -31,5 +31,23 @@ struct ShowViewModel: Hashable {
         
         self.schedule = movie.formatSchedule()
         self.rating = movie.formatRating()
+    }
+    
+    init() {
+        self.id = 0
+        self.name = ""
+        self.genres = []
+        self.imageURL = "photo"
+        self.summary = ""
+        self.type = ""
+        self.language = ""
+        self.status = ""
+        
+        self.schedule = ""
+        self.rating = ""
+    }
+    
+    func navigateToShowDetailView(id: Int) -> AnyView {
+        return AppRouter.navigateToShowDetailView(id: id)
     }
 }

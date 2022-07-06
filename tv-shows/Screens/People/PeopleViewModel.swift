@@ -69,7 +69,11 @@ final class PeopleViewModel: ObservableObject {
     }
     
     func navigateToPersonDetails(id: Int) -> AnyView {
-        AppRouter.navigateToPersonDetails(id: id)
+        if let personModel = peopleModels.first(where: { $0.id == id }) {
+            return AppRouter.navigateToPersonDetails(personModel: personModel)
+        } else {
+            return AnyView(Text("Not available at the moment"))
+        }
     }
     
     func resetSearch() {

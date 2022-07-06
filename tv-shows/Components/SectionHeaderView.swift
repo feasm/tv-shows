@@ -9,9 +9,11 @@ import SwiftUI
 
 struct SectionHeaderView: View {
     var title: String
+    var seeMore: Bool
     
-    init(_ title: String) {
+    init(_ title: String, seeMore: Bool = true) {
         self.title = title
+        self.seeMore = seeMore
     }
     
     var body: some View {

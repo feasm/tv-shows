@@ -13,31 +13,37 @@ protocol TVMazeService {
     func fetchPeople() -> AnyPublisher<[PersonModel], NetworkError>
     
     func searchShow(searchText: String) -> AnyPublisher<[SearchModel], NetworkError>
+    
     func getShow(id: Int) -> AnyPublisher<ShowModel, NetworkError>
+    func getPersonShows(id: Int) -> AnyPublisher<[PersonShowModel], NetworkError>
 }
 
 final class TVMazeServiceImpl: ObservableObject, TVMazeService {
     
-    let provider: HTTPProvider
+    let provider: HTTPProvider<TVMazeRequest>
     
-    init(provider: HTTPProvider = HTTPProvider(session: URLSession.shared)) {
+    init(provider: HTTPProvider<TVMazeRequest> = HTTPProvider(session: URLSession.shared)) {
         self.provider = provider
     }
     
     func fetchShows() -> AnyPublisher<[ShowModel], NetworkError> {
-        return provider.request(TVMazeRequest.fetchShows)
+        return provider.request(.fetchShows)
     }
     
     func fetchPeople() -> AnyPublisher<[PersonModel], NetworkError> {
-        return provider.request(TVMazeRequest.fetchPeople)
+        return provider.request(.fetchPeople)
     }
     
     func searchShow(searchText: String) -> AnyPublisher<[SearchModel], NetworkError> {
-        return provider.request(TVMazeRequest.searchShow(searchText))
+        return provider.request(.searchShow(searchText))
     }
     
     func getShow(id: Int) -> AnyPublisher<ShowModel, NetworkError> {
-        return provider.request(TVMazeRequest.getShow(id))
+        return provider.request(.getShow(id))
+    }
+    
+    func getPersonShows(id: Int) -> AnyPublisher<[PersonShowModel], NetworkError> {
+        return provider.request(.getPersonShows(id))
     }
     
 }

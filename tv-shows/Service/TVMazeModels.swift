@@ -129,3 +129,13 @@ struct CharacterModel: Codable {
 struct CountryModel: Codable {
     let name: String?
 }
+
+struct PersonShowModel: Decodable {
+    let type: String?
+    let show: SearchModel?
+    
+    private enum CodingKeys: String, CodingKey {
+        case type
+        case show = "_embedded"
+    }
+}

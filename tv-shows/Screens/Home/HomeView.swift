@@ -63,6 +63,8 @@ struct HomeView: View {
                                 
                             }
                             
+                            SectionView(viewModel: viewModel.favoritesSectionViewModel)
+                            
                         }
                         
                     }

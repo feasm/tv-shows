@@ -15,7 +15,7 @@ struct ShowDetailView: View {
         static let imageCorner: CGFloat = 10
     }
     
-    @StateObject var viewModel: ShowDetailViewModelImpl
+    @StateObject var viewModel: ShowDetailViewModel
     
     var body: some View {
         ZStack {
@@ -74,7 +74,7 @@ struct ShowDetailView: View {
                                 VStack(alignment: .leading,
                                        spacing: DesignSystemConstants.Spacing.short) {
                                     
-                                    SectionHeaderView("Cast")
+                                    SectionHeaderView("Cast", seeMore: false)
                                     
                                     peopleView
                                     
@@ -130,16 +130,20 @@ struct ShowDetailView: View {
                 ForEach(viewModel.actors,
                         id: \.self) { actorViewModel in
                     
-                    VStack(spacing: DesignSystemConstants.Spacing.veryShort) {
+                    NavigationLink(destination: viewModel.navigateToPersonDetailView(id: actorViewModel.id)) {
                         
-                        AsyncMovieImage(imageName: actorViewModel.photo,
-                                        height: 70,
-                                        width: 70)
-                        
-                        Text(actorViewModel.name)
+                        VStack(spacing: DesignSystemConstants.Spacing.veryShort) {
+                            
+                            AsyncMovieImage(imageName: actorViewModel.photo,
+                                            height: 70,
+                                            width: 70)
+                            
+                            Text(actorViewModel.name)
+                            
+                        }
+                        .frame(width: 70)
                         
                     }
-                    .frame(width: 70)
                     
                 }
                 
@@ -162,7 +166,7 @@ struct ShowDetailView: View {
             
             ForEach(viewModel.episodes, id: \.self) { episodeViewModel in
                 
-                NavigationLink(destination: AppRouter.navigateToEpisodeView(viewModel: episodeViewModel)) {
+                NavigationLink(destination: viewModel.navigateToEpisodeView(episodeViewModel: episodeViewModel)) {
                     
                     RowView(image: episodeViewModel.image,
                             title: episodeViewModel.name,

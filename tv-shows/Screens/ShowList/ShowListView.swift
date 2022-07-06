@@ -12,11 +12,9 @@ struct ShowListView: View {
     
     var body: some View {
         List {
-            
             ForEach(viewModel.filteredShowViewModels, id: \.self) { viewModel in
                 
                 NavigationLink(destination: AppRouter.navigateToShowDetailView(id: viewModel.id)) {
-                    
                     RowView(image: viewModel.imageURL,
                             title: viewModel.name,
                             description: viewModel.summary,

@@ -7,11 +7,11 @@
 
 import SwiftUI
 import Combine
-import LocalAuthentication
 
 final class HomeViewModel: ObservableObject {
     private var service: TVMazeService
     private var localStorage: LocalStorage
+    private let localAuthenticationManager = LocalAuthenticationManager()
     
     @Published var isLoggedIn = false
     @Published var isLoading = false
@@ -23,6 +23,7 @@ final class HomeViewModel: ObservableObject {
         }
     }
     @Published var sectionViewModels = [SectionViewModel]()
+    @Published var favoritesSectionViewModel = FavoritesSectionViewModel(title: "Favorites", showViewModels: [])
     @Published var searchText = ""
     @Published var hasSearchResults: Bool = false
     
@@ -36,15 +37,15 @@ final class HomeViewModel: ObservableObject {
     }
     
     func logIn() {
-        let reason = "Log in with Face ID to use the App"
-        LAContext().evaluatePolicy(
-            .deviceOwnerAuthentication,
-            localizedReason: reason
-        ) { [weak self] success, error in
-            if success {
-                self?.isLoggedIn = true
+        localAuthenticationManager
+            .authenticate()
+            .receive(on: RunLoop.main)
+            .sink { completion in
+                print(completion)
+            } receiveValue: { [weak self] isSuccess in
+                self?.isLoggedIn = isSuccess
             }
-        }
+            .store(in: &cancelbag)
     }
     
     func fetchShows() {
@@ -64,14 +65,13 @@ final class HomeViewModel: ObservableObject {
                     self.movies = movies
                     self.showViewModels = movies.map({ ShowViewModel(movie: $0) })
                     let allShowsSectionViewModel = SectionViewModel(title: "All movies", showViewModels: self.showViewModels)
+                                        
+                    self.sectionViewModels = [
+                        allShowsSectionViewModel
+                    ]
                     
                     self.favoriteShowViewModels = self.localStorage.getFavorites().map({ ShowViewModel(movie: $0) })
-                    let favoriteSectionViewModel = SectionViewModel(title: "Favorites", showViewModels: self.favoriteShowViewModels)
-                    
-                    self.sectionViewModels = [
-                        allShowsSectionViewModel,
-                        favoriteSectionViewModel
-                    ]
+                    self.favoritesSectionViewModel.showViewModels = self.favoriteShowViewModels
                 }
                 .store(in: &cancelbag)
 
@@ -102,8 +102,7 @@ final class HomeViewModel: ObservableObject {
     
     func updateFavorites() {
         favoriteShowViewModels = self.localStorage.getFavorites().map({ ShowViewModel(movie: $0) })
-        
-        sectionViewModels.first(where: { $0.title == "Favorites" })?.showViewModels = favoriteShowViewModels
+        favoritesSectionViewModel.showViewModels = favoriteShowViewModels
     }
     
     func navigateToSearchView() -> AnyView {
