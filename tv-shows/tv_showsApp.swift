@@ -12,8 +12,8 @@ struct tv_showsApp: App {
     init() {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.backgroundColor = UIColor(named: "PrimaryColor")
-        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "SecondaryColor")]
-        navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "SecondaryColor")]
+        navigationBarAppearance.titleTextAttributes = [.foregroundColor: UIColor(named: "SecondaryColor") ?? .clear]
+        navigationBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "SecondaryColor") ?? .clear]
                        
         UINavigationBar.appearance().standardAppearance = navigationBarAppearance
         UINavigationBar.appearance().tintColor = UIColor(named: "SecondaryColor")

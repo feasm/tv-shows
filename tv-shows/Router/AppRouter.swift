@@ -23,7 +23,6 @@ final class AppRouter {
     
     static func navigateToPeopleView() -> AnyView {
         let service = TVMazeServiceImpl()
-        let localStorage = LocalStorageImpl()
         let viewModel = PeopleViewModel(service: service)
         
         return AnyView(

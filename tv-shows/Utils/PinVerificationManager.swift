@@ -18,7 +18,7 @@ final class LocalAuthenticationManager: ObservableObject {
             self.context.evaluatePolicy(
                 .deviceOwnerAuthentication,
                 localizedReason: self.reason
-            ) { [weak self] success, error in
+            ) { success, error in
                 if let error = error {
                     promise(.failure(error))
                 } else {

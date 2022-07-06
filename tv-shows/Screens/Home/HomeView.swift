@@ -15,7 +15,11 @@ struct HomeView: View {
         if !viewModel.isLoggedIn {
             VStack {
                 TitleText("Need Authentication")
-                DescriptionText("Prove you owns your device!")
+                DescriptionText("Prove you own your device!")
+                Button("Authenticate") {
+                    viewModel.logIn()
+                }
+                .buttonStyle(.bordered)
             }
             .onAppear {
                 viewModel.logIn()
