@@ -35,6 +35,6 @@ struct ShowRowView: View {
 
 struct ShowRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ShowRowView(viewModel: ShowViewModel(movie: PreviewMocks.thorShow))
+        ShowRowView(viewModel: ShowViewModel(show: PreviewMocks.thorShow))
     }
 }

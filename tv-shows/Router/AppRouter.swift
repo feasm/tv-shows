@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class AppRouter {
+class AppRouter {
     
     static let localStorage = LocalStorageImpl()
     

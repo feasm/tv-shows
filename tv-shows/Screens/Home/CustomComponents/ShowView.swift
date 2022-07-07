@@ -35,7 +35,7 @@ struct ShowView: View {
 
 struct ShowView_Previews: PreviewProvider {
     static var previews: some View {
-        ShowView(ShowViewModel(movie: PreviewMocks.thorShow))
+        ShowView(ShowViewModel(show: PreviewMocks.thorShow))
             .previewLayout(.sizeThatFits)
     }
 }

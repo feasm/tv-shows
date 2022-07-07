@@ -15,7 +15,7 @@ struct PersonShowViewModel: Hashable {
         self.role = personShowModel.type ?? ""
         
         if let show = personShowModel.show?.show {
-            self.showViewModel = ShowViewModel(movie: show)
+            self.showViewModel = ShowViewModel(show: show)
         } else {
             self.showViewModel = ShowViewModel()
         }

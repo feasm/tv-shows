@@ -65,7 +65,7 @@ class FavoriteListViewModel: ShowListViewModel {
             .sink { [weak self] showModels in
                 guard let self = self else { return }
                 
-                self.showViewModels = showModels.map({ ShowViewModel(movie: $0) })
+                self.showViewModels = showModels.map({ ShowViewModel(show: $0) })
                 self.filterShows(by: self.searchText)
             }
             .store(in: &cancelBag)

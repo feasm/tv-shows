@@ -63,14 +63,14 @@ final class HomeViewModel: ObservableObject {
                     guard let self = self else { return }
                     
                     self.movies = movies
-                    self.showViewModels = movies.map({ ShowViewModel(movie: $0) })
+                    self.showViewModels = movies.map({ ShowViewModel(show: $0) })
                     let allShowsSectionViewModel = SectionViewModel(title: "All movies", showViewModels: self.showViewModels)
                                         
                     self.sectionViewModels = [
                         allShowsSectionViewModel
                     ]
                     
-                    self.favoriteShowViewModels = self.localStorage.getFavorites().map({ ShowViewModel(movie: $0) })
+                    self.favoriteShowViewModels = self.localStorage.getFavorites().map({ ShowViewModel(show: $0) })
                     self.favoritesSectionViewModel.showViewModels = self.favoriteShowViewModels
                 }
                 .store(in: &cancelbag)
@@ -91,7 +91,7 @@ final class HomeViewModel: ObservableObject {
                         self?.filteredShowViewModels = []
                     }
                 } receiveValue: { searchedShows in
-                    self.filteredShowViewModels = searchedShows.map({ ShowViewModel(movie: $0.show) })
+                    self.filteredShowViewModels = searchedShows.map({ ShowViewModel(show: $0.show) })
                 }
                 .store(in: &cancelbag)
     }
@@ -101,7 +101,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     func updateFavorites() {
-        favoriteShowViewModels = self.localStorage.getFavorites().map({ ShowViewModel(movie: $0) })
+        favoriteShowViewModels = localStorage.getFavorites().map({ ShowViewModel(show: $0) })
         favoritesSectionViewModel.showViewModels = favoriteShowViewModels
     }
     

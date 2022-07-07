@@ -19,18 +19,18 @@ struct ShowViewModel: Hashable {
     let language: String
     let status: String
     
-    init(movie: ShowModel) {
-        self.id = movie.id
-        self.name = movie.name
-        self.genres = movie.genres
-        self.imageURL = movie.image?.medium ?? "photo"
-        self.summary = movie.summary.htmlToString()
-        self.type = movie.type
-        self.language = movie.language
-        self.status = movie.status
+    init(show: ShowModel) {
+        self.id = show.id
+        self.name = show.name
+        self.genres = show.genres
+        self.imageURL = show.image?.medium ?? "photo"
+        self.summary = show.summary.htmlToString()
+        self.type = show.type
+        self.language = show.language
+        self.status = show.status
         
-        self.schedule = movie.formatSchedule()
-        self.rating = movie.formatRating()
+        self.schedule = show.formatSchedule()
+        self.rating = show.formatRating()
     }
     
     init() {

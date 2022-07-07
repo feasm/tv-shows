@@ -9,8 +9,8 @@ import Combine
 import SwiftUI
 
 final class ShowDetailViewModel: ObservableObject {
-    let service: TVMazeService
-    let localStorage: LocalStorage
+    private let service: TVMazeService
+    private let localStorage: LocalStorage
     let showId: Int
     
     @Published var isLoading = false

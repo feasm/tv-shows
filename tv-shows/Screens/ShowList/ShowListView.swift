@@ -38,6 +38,6 @@ struct ShowListView: View {
 
 struct ShowListView_Previews: PreviewProvider {
     static var previews: some View {
-        AppRouter.navigateToShowListView(viewModels: [ShowViewModel(movie: PreviewMocks.thorShow)], title: "Favorites")
+        AppRouter.navigateToShowListView(viewModels: [ShowViewModel(show: PreviewMocks.thorShow)], title: "Favorites")
     }
 }
