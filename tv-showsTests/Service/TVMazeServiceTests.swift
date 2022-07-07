@@ -21,7 +21,7 @@ class TVMazeServiceTests: XCTestCase {
     
     private func testRequest<T>(publisher: AnyPublisher<T, NetworkError>) {
         // Given
-        var expectation = expectation(description: "expectation")
+        let expectation = expectation(description: "expectation")
         var didReceivedValue = false
         
         // When

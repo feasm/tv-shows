@@ -18,49 +18,55 @@ struct PersonDetailView: View {
     @StateObject var viewModel: PersonDetailViewModel
     
     var body: some View {
-        ScrollView {
-            ZStack {
-                
-                ImageHeaderView(imageURL: viewModel.photo)
-                
+        ZStack {
+            ScrollView {
                 ZStack {
                     
-                    RoundedRectangle(cornerRadius: Constants.imageCorner,
-                                     style: RoundedCornerStyle.continuous)
-                        .fill(Color.primaryColor)
+                    ImageHeaderView(imageURL: viewModel.photo)
                     
-                    LazyVStack(alignment: .leading,
-                           spacing: DesignSystemConstants.Spacing.medium) {
+                    ZStack {
                         
-                        TitleText(viewModel.name)
+                        RoundedRectangle(cornerRadius: Constants.imageCorner,
+                                         style: RoundedCornerStyle.continuous)
+                            .fill(Color.primaryColor)
                         
-                        if viewModel.personShowsViewModel.isEmpty {
-                            SubtitleText("No shows available at the moment.")
-                        } else {
-                            ForEach(viewModel.personShowsViewModel, id: \.self) { personShowViewModel in
-                                
-                                NavigationLink(destination: viewModel.navigateToShowDetailView(id: personShowViewModel.showViewModel.id)) {
-                                    ShowRowView(viewModel: personShowViewModel.showViewModel)
+                        LazyVStack(alignment: .leading,
+                               spacing: DesignSystemConstants.Spacing.medium) {
+                            
+                            TitleText(viewModel.name)
+                            
+                            if viewModel.personShowsViewModel.isEmpty {
+                                SubtitleText("No shows available at the moment.")
+                            } else {
+                                ForEach(viewModel.personShowsViewModel, id: \.self) { personShowViewModel in
+                                    
+                                    NavigationLink(destination: viewModel.navigateToShowDetailView(id: personShowViewModel.showViewModel.id)) {
+                                        ShowRowView(viewModel: personShowViewModel.showViewModel)
+                                    }
+                                    
                                 }
-                                
                             }
+                            
+                            Spacer()
+                            
                         }
-                        
-                        Spacer()
+                        .padding(DesignSystemConstants.Spacing.medium)
                         
                     }
-                    .padding(DesignSystemConstants.Spacing.medium)
+                    .padding(.top,
+                             Constants.imageHeight - Constants.imageCorner)
                     
                 }
-                .padding(.top,
-                         Constants.imageHeight - Constants.imageCorner)
                 
             }
+            .edgesIgnoringSafeArea(.top)
+            .onAppear {
+                viewModel.getPersonDetail()
+            }
             
-        }
-        .edgesIgnoringSafeArea(.top)
-        .onAppear {
-            viewModel.getPersonDetail()
+            if viewModel.isLoading {
+                LoadingView()
+            }
         }
     }
 }
